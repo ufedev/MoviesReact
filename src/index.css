@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap");
+html {
+  font-size: 62.5%; /* 62.5% es equivalente a 10px, entonces 1rem = 10px
+  /* 
+      Por defecto
+      ROOT EM  = rem 
+      1rem = 16px
+  
+  */
+  box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+body {
+  font-family: "Inter", sans-serif;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+h1 {
+  font-size: 5rem; /* 50px */
+  font-weight: 900;
+  text-align: center;
+}
+
+.container {
+  width: 95%;
+  max-width: 120rem; /* 1200px */
+  width: min(95%, 120rem); /* Significa lo mismo que las 2 lineas previas */
+  margin: 0 auto;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.moviecard {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.moviecard h3 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.moviecard-image {
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.moviecard:hover .moviecard-image img {
+  transform: scale(1.05);
+}
