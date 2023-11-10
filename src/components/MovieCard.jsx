@@ -1,14 +1,18 @@
-import portada from "./../assets/portada.jpg"
 
-function MovieCard () {
 
+function MovieCard ({ pelicula })// children key
+{ //LA FUNCION de COMPONENTES NO PUEDE SER ASINCRONA 
+    const { title, overview, poster_path, vote_averange, vote_count, release_date } = pelicula
     return (
         <article className='moviecard'>
-            <h3>Titulo Pelicula</h3>
             <div className="moviecard-image">
-                <img src={portada} alt='Portada de Pelicula' />
+                <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={`Poster ${title}`} />
             </div>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum repudiandae eius, illo possimus voluptatum mollitia voluptatibus omnis sit a ut dicta laborum veniam quasi? Quis quaerat sed vero dolore corporis!</p>
+            <h3>{title}</h3>
+
+            <p>
+                {overview}
+            </p>
         </article>
     )
 }
