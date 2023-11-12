@@ -36,7 +36,7 @@ function Container () {
                 if (movies.length === 0) {
                     setMovies(res.results)
                 } else {
-                    setMovies([movies, ...res.results])
+                    setMovies([...movies, ...res.results])
                 }
 
             }
