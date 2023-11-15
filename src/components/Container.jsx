@@ -35,10 +35,12 @@ function Container () {
                 const res = await req.json()
                 if (movies.length === 0) {
                     setMovies(res.results)
-                } else {
+                } else{
                     const nuevoArray = movies.concat(res.results) // forma más legible
                     const nuevoArray2 = [...movies, ...res.results] // forma nueva spread operator
                     setMovies(nuevoArray)
+                    
+
                 }
 
             }
