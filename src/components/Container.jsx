@@ -18,7 +18,7 @@ function Container () {
 
     const getMovies = async () => {
         try {
-
+            setLoader(true)
             // https://api.themoviedb.org/3/movie/popular
             const url = `${import.meta.env.VITE_URL}?language=es-ES&page=${page}` // template string 
 
@@ -36,7 +36,9 @@ function Container () {
                 if (movies.length === 0) {
                     setMovies(res.results)
                 } else {
-                    setMovies([movies, ...res.results])
+                    const nuevoArray = movies.concat(res.results) // forma más legible
+                    const nuevoArray2 = [...movies, ...res.results] // forma nueva spread operator
+                    setMovies(nuevoArray)
                 }
 
             }
@@ -44,6 +46,8 @@ function Container () {
 
         } catch (err) {
             console.log(err.message)
+        } finally {
+            setLoader(false)
         }
     }
 
@@ -51,13 +55,39 @@ function Container () {
         event.preventDefault()
         setPage(page + 1)
     }
+    const infiniteScroll = (e) => {
+        e.preventDefault()
+        console.log((Math.ceil(window.innerHeight + document.documentElement.scrollTop) == document.documentElement.offsetHeight))
 
-    useEffect(() => {
+        if ((Math.ceil(window.innerHeight + document.documentElement.scrollTop) === (document.documentElement.offsetHeight)) && !loader) {
+            // console.log('hoal')
+            setPage(page + 1)
+
+
+        }
+        // console.log(window.innerHeight + document.documentElement.scrollTop + " = alto de la pagina por sumatoria")
+        // console.log(document.documentElement.offsetHeight + " altura total de todo el contenido de la pagina")
+
+
+
+    }
+
+
+
+
+    useEffect(() => { // Con boton para ver más
+
         getMovies()
     }, [page]) // array de dependencias. si esta vacio se ejecuta una vez se monta el componente
     // si tiene dependencias, se va a ejecutar el USEEFFECT cada vez que cambie la/s dependencia/s
 
+    // useEffect(() => {
+    //     // getMovies()
+    //     window.addEventListener('scroll', infiniteScroll)
 
+
+    //     return () => window.removeEventListener('scroll', infiniteScroll)
+    // }, [page])
 
     return (
         <>
@@ -65,14 +95,14 @@ function Container () {
                 {/* {1 === '1' ? (loader ? <p>Cargando</p> : <p>No cargando</p>) : "no es igual a 1"} */}
                 {
                     movies?.map((pelicula) => {
-                        return <MovieCard key={pelicula.id} pelicula={pelicula} />
+                        return <MovieCard key={`${pelicula.id}${Math.random()}`} pelicula={pelicula} />
                     })
                 }
 
             </main>
-            <button className='btn-seemore' onClick={handleClick}>Ver más</button>
 
-            {loader && <p>Cargando...</p>}
+
+            {loader ? <p className='loader'>Cargando...</p> : <button className='btn-seemore' onClick={handleClick}>Ver más</button>}
         </>
     )
 }
