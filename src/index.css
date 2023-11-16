@@ -54,6 +54,23 @@ a {
   margin-bottom: 5rem;
 }
 
+.btn-movie {
+  border: none;
+  background-color: unset;
+}
+
+.onemovie {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 10rem;
+}
+
+.onemovie-desktop {
+  display: none;
+}
+.onemovie-mobile {
+  display: block;
+}
 .moviecard {
   padding: 0.5rem;
   border-radius: 0.75rem;
@@ -137,5 +154,24 @@ a {
 @media (min-width: 992px) {
   .content {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .onemovie {
+    width: 80rem;
+    max-width: 95%;
+    background-color: #f1f1f1;
+    padding: 2rem;
+    box-shadow: 1px 1px 10px 1px rgba(20, 20, 20, 0.1);
+    border-radius: 1rem;
+  }
+  .onemovie img {
+    border-radius: 0.75rem;
+  }
+
+  .onemovie-desktop {
+    display: block;
+  }
+  .onemovie-mobile {
+    display: none;
   }
 }

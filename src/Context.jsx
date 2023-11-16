@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
-
+import { useNavigate } from "react-router-dom"
 
 
 const AppContext = createContext()
@@ -11,6 +11,8 @@ const Provider = ({ children }) => {
     const [movies, setMovies] = useState([]) // useState retorna un arreglo
     const [loader, setLoader] = useState(false)
     const [page, setPage] = useState(1)
+    const [movie, setMovie] = useState({})
+    const navigate = useNavigate()
 
 
 
@@ -40,8 +42,6 @@ const Provider = ({ children }) => {
                 }
 
             }
-
-
         } catch (err) {
             console.log(err.message)
         } finally {
@@ -53,33 +53,27 @@ const Provider = ({ children }) => {
         event.preventDefault()
         setPage(page + 1)
     }
-    const infiniteScroll = (e) => {
+
+    const handleSeeMovie = (e, pelicula) => {
         e.preventDefault()
-        console.log((Math.ceil(window.innerHeight + document.documentElement.scrollTop) == document.documentElement.offsetHeight))
-
-        if ((Math.ceil(window.innerHeight + document.documentElement.scrollTop) === (document.documentElement.offsetHeight)) && !loader) {
-            // console.log('hoal')
-            setPage(page + 1)
-
-
-        }
-
+        setMovie(pelicula)
+        navigate("/movie")
 
     }
 
-
-
-
     useEffect(() => { // Con boton para ver más
-
         getMovies()
     }, [page]) // array de dependencias. si esta vacio se ejecuta una vez se monta el componente
-    // si tiene dependencias, se va a ejecutar el USEEFFECT cada vez que cambie la/s dependencia/s
-
 
 
     return (
-        <AppContext.Provider value={{}}>
+        <AppContext.Provider value={{
+            loader: loader,
+            handleClick: handleClick,
+            movies: movies,
+            handleSeeMovie,
+            movie: movie
+        }}>
             {children}
         </AppContext.Provider>
     )

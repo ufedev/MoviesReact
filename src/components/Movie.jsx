@@ -1,41 +1,23 @@
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useApp } from "../Context"
 
 const Movie = () => {
+    const { movie } = useApp()
+    const { title, backdrop_path, overview, vote_average, vote_count, release_date, poster_path } = movie
+    const stars = Math.round(vote_average / 2)
+    console.log(movie)
 
-    const [movie, setMovie] = useState({})
-    const { id } = useParams()
+    return (
+        <main className='container onemovie'>
+            <img src={`https://image.tmdb.org/t/p/w500${backdrop_path}`} className="onemovie-desktop" />
+            <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} className="onemovie-mobile" />
 
-    // console.log(typeof (1 + 1))
-
-    const getMovie = async () => {
-
-        try {
-            const url = `https://api.themoviedb.org/3/find/${id}` // template string
-            const config = {
-                headers: {
-                    'content-type': 'application/json',
-                    authorization: `Bearer ${import.meta.env.VITE_TOKEN}`
-                }
-            }
-
-            const req = await fetch(url, config)
-            const res = await req.json()
-
-            console.log(res)
-
-        } catch (err) {
-
-        }
-
-    }
-
-
-    useEffect(() => {
-        getMovie()
-    }, [])//el array es de dependencias
-
-    return <h1>pelicula {id}</h1>
+            <div>
+                <h1>{title}</h1>
+                <p>{overview}</p>
+                <span>⭐{stars}/5 con {vote_count} votaciones</span>
+            </div>
+        </main>
+    )
 
 }
 

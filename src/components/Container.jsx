@@ -1,4 +1,5 @@
 import MovieCard from "./MovieCard.jsx"
+import { useApp } from '../Context.jsx'
 // useEffect  y useState
 // hooks = utilidades creadas de React o pueden ser creadas por nosotros
 // Virtual DOM !== Real DOM
@@ -10,6 +11,7 @@ import MovieCard from "./MovieCard.jsx"
 
 function Container () {
 
+    const { movies, loader, handleClick } = useApp()
 
 
     return (
