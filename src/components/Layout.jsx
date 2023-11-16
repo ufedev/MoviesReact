@@ -1,11 +1,9 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, Link } from "react-router-dom"
 import { Fragment } from 'react'
 const Layout = () => {
     return (
         <Fragment>
-
-            <h1>Movies</h1>
-
+            <Link to="/"><h1>Movies</h1></Link>
             <Outlet />
 
         </Fragment>

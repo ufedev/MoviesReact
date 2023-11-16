@@ -30,6 +30,11 @@ h1 {
   text-align: center;
 }
 
+a {
+  text-decoration: none;
+  color: #202020;
+}
+
 .container {
   width: 95%;
   max-width: 120rem; /* 1200px */
