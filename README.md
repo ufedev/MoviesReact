@@ -6,7 +6,7 @@
 
 ```bash
 
-git clone git@github.com:ufedev/MoviesReact.git
+git clone https://github.com/ufedev/MoviesReact.git
 
 ```
 
